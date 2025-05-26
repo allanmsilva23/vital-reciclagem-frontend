@@ -1,10 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
-
-const router = createRouter({
-  history: createWebHistory('/vital-reciclagem-frontend/'),
-  routes,
-});
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '@/views/HomeView.vue'
 
 const routes = [
   {
@@ -13,5 +8,10 @@ const routes = [
     component: HomeView,
   }
 ]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
 
 export default router
