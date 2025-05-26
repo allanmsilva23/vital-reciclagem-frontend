@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://allanmsilva23.github.io/vital-reciclagem-frontend/",
   "dependencies": {
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
