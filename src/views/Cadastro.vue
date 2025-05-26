@@ -11,7 +11,7 @@
     <div class="form-container">
       <div class="input-group">
         <label>Nome da empresa</label>
-        <input type="text" placeholder="Nome da empresa" v-model="empresa.nome">
+        <input type="text" placeholder="Nome da empresa" v-model="empresa.name">
       </div>
 
       <div class="input-group">
@@ -22,7 +22,7 @@
       <div class="input-group">
         <label>Senha</label>
         <div class="password-input">
-          <input :type="showPassword ? 'text' : 'password'" placeholder="Senha" v-model="empresa.senha">
+          <input :type="showPassword ? 'text' : 'password'" placeholder="Senha" v-model="empresa.password">
           <button class="toggle-password" @click.prevent="togglePassword">
             <svg class="eye-icon" viewBox="0 0 24 24">
               <path v-if="showPassword" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
@@ -32,20 +32,19 @@
         </div>
       </div>
 
-<div class="input-group select-container">
-  <label>Tipo de pagamento</label>
-  <div class="select-wrapper">
-    <select v-model="empresa.tipoPagamento">
-      <option value="dinheiro">Dinheiro</option>
-      <option value="cartao">Cartão</option>
-      <option value="pix">PIX</option>
-    </select>
-    <svg class="custom-select-icon" viewBox="0 0 24 24">
-      <path d="M7 10l5 5 5-5z"/>
-    </svg>
-  </div>
-</div>
-
+      <div class="input-group select-container">
+        <label>Tipo de pagamento</label>
+        <div class="select-wrapper">
+          <select v-model="empresa.payment_method">
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao">Cartão</option>
+            <option value="pix">PIX</option>
+          </select>
+          <svg class="custom-select-icon" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </div>
+      </div>
 
       <div class="input-group">
         <label>CNPJ</label>
@@ -54,12 +53,12 @@
 
       <div class="input-group">
         <label>Data de abertura da empresa</label>
-        <input type="text" placeholder="00/00/0000" v-model="empresa.dataAbertura">
+        <input type="text" placeholder="DD/MM/AAAA" v-model="empresa.opening_date">
       </div>
 
       <div class="input-group">
         <label>Endereço</label>
-        <input type="text" placeholder="Endereço da empresa" v-model="empresa.endereco">
+        <input type="text" placeholder="Endereço da empresa" v-model="empresa.address">
       </div>
 
       <div class="terms-checkbox">
@@ -76,8 +75,9 @@
     </div>
   </div>
 </template>
-
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CadastroView',
   data() {
@@ -85,22 +85,72 @@ export default {
       showPassword: false,
       aceitouTermos: false,
       empresa: {
-        nome: '',
+        name: '',  // Alterado para match com a API
         email: '',
-        senha: '',
-        tipoPagamento: 'dinheiro',
+        password: '',  // Alterado para match com a API
+        payment_method: 'dinheiro',  // Alterado para match com a API
         cnpj: '',
-        dataAbertura: '',
-        endereco: ''
-      }
+        opening_date: '',  // Alterado para match com a API
+        address: ''  // Alterado para match com a API
+      },
+      loading: false,
+      error: null
     }
   },
   methods: {
     togglePassword() {
       this.showPassword = !this.showPassword
     },
-    criarConta() {
-      console.log('Dados do cadastro:', this.empresa)
+    async criarConta() {
+      if (!this.aceitouTermos) {
+        this.error = 'Você deve aceitar os termos de uso';
+        return;
+      }
+
+      this.loading = true;
+      this.error = null;
+
+      try {
+        // Verifica se todos os campos obrigatórios estão preenchidos
+        if (!this.empresa.opening_date) {
+          throw new Error('Data de abertura é obrigatória');
+        }
+
+        const dadosParaEnviar = {
+          ...this.empresa,
+          opening_date: this.formatarData(this.empresa.opening_date)
+        };
+
+        const response = await axios.post('http://127.0.0.1:5000/clients', dadosParaEnviar, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        console.log('Cadastro realizado com sucesso:', response.data);
+        this.$router.push('/login'); // Redireciona para login após cadastro
+        
+      } catch (error) {
+        console.error('Erro no cadastro:', error);
+        if (error.response) {
+          // Trata erros específicos da API
+          if (error.response.status === 400) {
+            this.error = error.response.data.error || 'Dados inválidos. Verifique os campos.';
+          }
+        } else if (error.message) {
+          this.error = error.message;
+        } else {
+          this.error = 'Erro ao conectar com o servidor';
+        }
+      } finally {
+        this.loading = false;
+      }
+    },
+    formatarData(data) {
+      // Converte de DD/MM/YYYY (input comum) para YYYY-MM-DD (API)
+      if (!data) return '';
+      const [dd, mm, yyyy] = data.split('/');
+      return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
     },
     voltar() {
       this.$router.go(-1)
