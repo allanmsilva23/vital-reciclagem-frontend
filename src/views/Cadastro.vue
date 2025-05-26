@@ -78,6 +78,7 @@
 </template>
 <script>
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default {
   name: 'CadastroView',
@@ -121,7 +122,7 @@ export default {
           opening_date: this.formatarData(this.empresa.opening_date)
         };
 
-        const response = await axios.post('http://127.0.0.1:5000/clients', dadosParaEnviar, {
+        const response = await axios.post(`${API_URL}/clients`, dadosParaEnviar, {
           headers: {
             'Content-Type': 'application/json'
           }
@@ -155,6 +156,7 @@ export default {
   }
 }
 </script>
+
 
 <style scoped>
 /* Reset e estilos base */
