@@ -37,8 +37,7 @@
   <div class="select-wrapper">
     <select v-model="empresa.tipoPagamento">
       <option value="dinheiro">Dinheiro</option>
-      <option value="cartao">Cartão</option>
-      <option value="pix">PIX</option>
+      <option value="produto">Produto</option>
     </select>
     <svg class="custom-select-icon" viewBox="0 0 24 24">
       <path d="M7 10l5 5 5-5z"/>
