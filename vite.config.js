@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
 export default defineConfig({
+  base: '/vital-reciclagem-frontend/',
   plugins: [vue()],
   resolve: {
     alias: {
