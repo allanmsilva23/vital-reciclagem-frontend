@@ -39,6 +39,7 @@
             <option value="dinheiro">Dinheiro</option>
             <option value="cartao">Cartão</option>
             <option value="pix">PIX</option>
+            <option value="produto">Produto</option>
           </select>
           <svg class="custom-select-icon" viewBox="0 0 24 24">
             <path d="M7 10l5 5 5-5z"/>
@@ -85,13 +86,13 @@ export default {
       showPassword: false,
       aceitouTermos: false,
       empresa: {
-        name: '',  // Alterado para match com a API
+        name: '',  
         email: '',
-        password: '',  // Alterado para match com a API
-        payment_method: 'dinheiro',  // Alterado para match com a API
+        password: '',  
+        payment_method: 'dinheiro', 
         cnpj: '',
-        opening_date: '',  // Alterado para match com a API
-        address: ''  // Alterado para match com a API
+        opening_date: '',  
+        address: ''  
       },
       loading: false,
       error: null
@@ -111,7 +112,6 @@ export default {
       this.error = null;
 
       try {
-        // Verifica se todos os campos obrigatórios estão preenchidos
         if (!this.empresa.opening_date) {
           throw new Error('Data de abertura é obrigatória');
         }
@@ -128,12 +128,10 @@ export default {
         });
         
         console.log('Cadastro realizado com sucesso:', response.data);
-        this.$router.push('/login'); // Redireciona para login após cadastro
-        
+        this.$router.push('/login'); 
       } catch (error) {
         console.error('Erro no cadastro:', error);
         if (error.response) {
-          // Trata erros específicos da API
           if (error.response.status === 400) {
             this.error = error.response.data.error || 'Dados inválidos. Verifique os campos.';
           }
@@ -147,7 +145,6 @@ export default {
       }
     },
     formatarData(data) {
-      // Converte de DD/MM/YYYY (input comum) para YYYY-MM-DD (API)
       if (!data) return '';
       const [dd, mm, yyyy] = data.split('/');
       return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;

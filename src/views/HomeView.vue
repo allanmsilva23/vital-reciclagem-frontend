@@ -9,7 +9,7 @@
       <p class="subtitle">
         Cadastre sua empresa, acompanhe coletas de óleo e contribua para um futuro sustentável.
       </p>
-      <button class="login-btn">Fazer login</button>
+      <button class="login-btn">Fazer login </button>
       <router-link to="/cadastro" class="register-btn">Criar conta</router-link>
     </div>
   </div>
