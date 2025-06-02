@@ -9,7 +9,7 @@
       <p class="subtitle">
         Cadastre sua empresa, acompanhe coletas de óleo e contribua para um futuro sustentável.
       </p>
-      <button class="login-btn">Fazer login </button>
+      <router-link to="/login" class="login-btn">Fazer login </router-link>
       <router-link to="/cadastro" class="register-btn">Criar conta</router-link>
     </div>
   </div>
@@ -81,6 +81,9 @@
 
 /* Botões */
 .login-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
   width: 100%;
   padding: 17px 0;
   background-color: #9DD549;
