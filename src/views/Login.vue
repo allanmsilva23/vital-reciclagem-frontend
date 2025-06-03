@@ -11,14 +11,28 @@
 
       <div class="input-group">
         <label>Email</label>
-        <input type="email" placeholder="Digite seu email" v-model="credenciais.email">
+        <input 
+          type="email" 
+          placeholder="Digite seu email" 
+          v-model="credenciais.email"
+          :disabled="loading"
+        >
       </div>
 
       <div class="input-group">
         <label>Senha</label>
         <div class="password-input">
-          <input :type="showPassword ? 'text' : 'password'" placeholder="Digite sua senha" v-model="credenciais.senha">
-          <button class="toggle-password" @click.prevent="togglePassword">
+          <input 
+            :type="showPassword ? 'text' : 'password'" 
+            placeholder="Digite sua senha" 
+            v-model="credenciais.senha"
+            :disabled="loading"
+          >
+          <button 
+            class="toggle-password" 
+            @click.prevent="togglePassword"
+            :disabled="loading"
+          >
             <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M1 1l22 22" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M17.94 17.94C16.13 19.13 14.13 20 12 20c-5 0-9.27-3.11-11-7.5a11.89 11.89 0 0 1 4.15-5.26" />
@@ -32,15 +46,36 @@
         </div>
       </div>
 
-      <router-link to="/recuperar-senha" class="forgot-password">Esqueceu a senha?</router-link>
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
 
-      <button class="login-button" @click="fazerLogin">
-        <span class="login-button-text">Fazer Login</span>
+      <router-link 
+        to="/recuperar-senha" 
+        class="forgot-password"
+        :class="{ 'disabled-link': loading }"
+      >
+        Esqueceu a senha?
+      </router-link>
+
+      <button 
+        class="login-button" 
+        @click="fazerLogin"
+        :disabled="loading"
+      >
+        <span class="login-button-text">
+          {{ loading ? 'Carregando...' : 'Fazer Login' }}
+        </span>
       </button>
 
       <div class="register-link">
         <span>Não tem conta?</span>
-        <router-link to="/cadastro">Criar conta</router-link>
+        <router-link 
+          to="/cadastro"
+          :class="{ 'disabled-link': loading }"
+        >
+          Criar conta
+        </router-link>
       </div>
     </div>
   </div>
@@ -50,12 +85,16 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const credenciais = reactive({
   email: '',
   senha: ''
 })
 
 const showPassword = ref(false)
+const loading = ref(false)
+const errorMessage = ref('')
 const router = useRouter()
 
 function togglePassword() {
@@ -66,12 +105,43 @@ function voltar() {
   router.back()
 }
 
-function fazerLogin() {
-  if (credenciais.email && credenciais.senha) {
-    console.log('Login simulado:', credenciais)
+async function fazerLogin() {
+  if (!credenciais.email || !credenciais.senha) {
+    errorMessage.value = 'Preencha todos os campos!'
+    return
+  }
+
+  loading.value = true
+  errorMessage.value = ''
+
+  try {
+    const response = await fetch(`${API_URL}/clients/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: credenciais.email,
+        password: credenciais.senha
+      }),
+      credentials: 'include' // Para lidar com cookies se necessário
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.error || 'Erro ao fazer login')
+    }
+
+    // Armazena os dados do usuário
+    localStorage.setItem('client', JSON.stringify(data.client))
     router.push('/dashboard')
-  } else {
-    alert('Preencha todos os campos!')
+    
+  } catch (error) {
+    errorMessage.value = error.message || 'Credenciais inválidas'
+    console.error('Erro no login:', error)
+  } finally {
+    loading.value = false
   }
 }
 </script>
