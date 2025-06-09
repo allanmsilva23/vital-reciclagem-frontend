@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="modal">
-      <h2>Gerar Certificado</h2>
+      <h2 class="title">Gerar Certificado</h2>
       <form @submit.prevent="generatePDF">
         <label>
           Nome:
@@ -173,7 +173,6 @@ function generatePDF() {
   doc.save('CertificadoVital.pdf')
   close()
 }
-
 </script>
 
 <style scoped>
@@ -188,10 +187,16 @@ function generatePDF() {
   font-family: 'Arial', sans-serif;
 }
 
-h2 {
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
+.title {
+  width: 100%;
+  max-width: 353px;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 130%;
+  color: #4D3E3E;
+  align-self: flex-start;
+  margin-bottom: 40px;
 }
 
 label {

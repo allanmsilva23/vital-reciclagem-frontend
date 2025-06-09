@@ -310,4 +310,17 @@ body, html {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+.error-message {
+  color: #d9534f; /* Vermelho escuro para erro */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8d7da; /* Fundo vermelho claro */
+    border: 1px solid #f5c6cb; /* Borda vermelha */
+    border-radius: 5px; /* Cantos arredondados */
+}
 </style>

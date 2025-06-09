@@ -9,6 +9,7 @@
 
     <!-- Formulário de cadastro -->
     <div class="form-container">
+      <h1 class="title">Cadastro</h1>
       <div class="input-group">
         <label>Nome da empresa</label>
         <input type="text" placeholder="Nome da empresa" v-model="empresa.name">
@@ -197,6 +198,18 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.title {
+  width: 100%;
+  max-width: 353px;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 130%;
+  color: #4D3E3E;
+  align-self: flex-start;
+  margin-bottom: 40px;
 }
 
 /* Botão de voltar */
