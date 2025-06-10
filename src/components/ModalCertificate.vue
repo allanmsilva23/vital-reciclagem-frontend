@@ -61,6 +61,8 @@
 import { ref } from 'vue'
 import jsPDF from 'jspdf'
 import logo from '../assets/logo.png'
+import '../css/style.css'
+
 
 
 const emit = defineEmits(['close'])
@@ -105,7 +107,7 @@ function generatePDF() {
     const ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0)
 
-    const imgData = canvas.toDataURL('image/png')
+    const imgData = canvas.toDataURL('../assets/logo.png', 'image/png')
 
     doc.addImage(imgData, 'PNG', 20, 10, 40, 20) 
     }
@@ -175,84 +177,8 @@ function generatePDF() {
 }
 </script>
 
-<style scoped>
-.modal {
-  background: #f6ffe3; 
-  padding: 2rem;
-  border-radius: 8px;
-  min-width: 320px;
-  max-width: 400px;
-  margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  font-family: 'Arial', sans-serif;
-}
+<style>
+@import '../css/style.css'
 
-.title {
-  width: 100%;
-  max-width: 353px;
-  font-family: 'Poppins';
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 130%;
-  color: #4D3E3E;
-  align-self: flex-start;
-  margin-bottom: 40px;
-}
-
-label {
-  display: block;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.4rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  background-color: white;
-}
-
-fieldset {
-  border: none;
-  padding: 0;
-  margin: 1.5rem 0;
-}
-
-legend {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.produto-item {
-  margin-bottom: 0.8rem;
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
-}
-
-.actions button {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #a7e163; 
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.actions button:hover {
-  background-color: #8bc34a;
-}
 </style>
 

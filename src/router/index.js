@@ -2,18 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import Cadastro from '../views/Cadastro.vue'
 import Login from '../views/Login.vue'
-import PageTest from '../views/PageTest.vue'
+import EmailPage from '../views/EmailView.vue'
+import CertificatePage from '../views/CertificateView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: HomeView
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: PageTest
   },
   {
     path: '/cadastro',
@@ -24,7 +20,17 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
-  }
+  },
+    {
+    path: '/enviar-email',
+    name: 'email',
+    component: EmailPage
+  },
+  {
+    path: '/criar-certificado',
+    name: 'certificado',
+    component: CertificatePage
+  },
 ]
 
 const router = createRouter({
