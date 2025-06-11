@@ -185,27 +185,6 @@
       <path opacity="0.4" d="M6.78271 16.626L10.5234 11.7644L14.7903 15.1161L18.451 10.3916" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </div>
-
-  <!-- Ícone USUÁRIOS -->
-  <div class="footer-icon active">
-    <!-- Fundo oval SVG só quando ativo -->
-    <div class="footer-bg">
-      <svg width="62" height="40" viewBox="0 0 62 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 20C0 8.95431 8.9543 0 20 0H42C53.0457 0 62 8.95431 62 20C62 31.0457 53.0457 40 42 40H20C8.9543 40 0 31.0457 0 20Z" fill="white" fill-opacity="0.2"/>
-      </svg>
-    </div>
-    <!-- Ícone usuários -->
-    <img :src="require('@/assets/usuarios.png')" alt="Usuários icone" />
-  </div>
-
-  <!-- Ícone ESTOQUE -->
-  <div class="footer-icon">
-    <!-- Fundo oval SVG só quando ativo -->
-    <div class="footer-bg">
-      <!-- Este SVG só aparece se estiver com a classe 'active' -->
-    </div>
-<img :src="require('@/assets/estoque.png')" alt="Estoque icone" />
-  </div>
 </div>
 </div>
 
@@ -213,9 +192,6 @@
 </template>
 
 <script>
-import usuariosIcon from '@/assets/usuarios.png'
-import estoqueIcon from '@/assets/estoque.png'
-
 export default {
   data() {
     return {

@@ -11,6 +11,8 @@
       </p>
       <router-link to="/login" class="login-btn">Fazer login </router-link>
       <router-link to="/cadastro" class="register-btn">Criar conta</router-link>
+      <router-link to="/estoque" class="nav-btn">Página Estoque</router-link>
+      <router-link to="/usuarios" class="nav-btn">Página Usuários</router-link>
     </div>
   </div>
 </template>
@@ -109,5 +111,25 @@
   cursor: pointer;
   text-align: center;
   text-decoration: none;
+}
+
+.nav-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  margin-top: 12px;
+  border: 2px solid #6BB200;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  background-color: transparent;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #6BB200;
+}
+
+.nav-btn:hover {
+  color: #fff;
 }
 </style>
