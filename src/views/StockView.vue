@@ -4,5 +4,5 @@
     </div> 
 </template>   
 <script setup>
-import StockTable from '../components/StockTable.vue';
+import StockTable from '../components/Stock/StockTable.vue';
 </script>

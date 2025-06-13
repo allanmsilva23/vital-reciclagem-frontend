@@ -168,7 +168,7 @@
 </template>
 
 <script>
-import '../css/TableClients.css';
+import '@/css/TableClients.css';
 
 export default {
   data() {
