@@ -1,0 +1,286 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.cadastro-container {
+  position: fixed;
+  width: 100%;
+  min-width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(169.23deg, #FBFFF5 1.56%, #F1FFDC 97.1%);
+  font-family: 'Inter', sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container do formulário */
+.form-container {
+  width: 100%;
+  max-width: 393px;
+  margin: 60px auto 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Botão de voltar */
+.back-button {
+  position: fixed;
+  width: 39px;
+  height: 39px;
+  left: 20px;
+  top: 50px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  fill: #000000;
+}
+
+/* Grupos de input */
+.input-group {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 353px;
+}
+
+.input-group label {
+  display: block;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  color: #000000;
+  margin-bottom: 6px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  height: 45px;
+  padding: 18px 16px;
+  background: #FFFFFF;
+  border: 1px solid #D8DADC;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: rgba(0, 0, 0, 0.5);
+  appearance: none;
+}
+
+.input-group input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Campo de senha */
+.password-input {
+  position: relative;
+  width: 100%;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.eye-icon {
+  width: 24px;
+  height: 24px;
+  fill: rgba(0, 0, 0, 0.6);
+  margin-top: 7px;
+}
+
+/* Select com ícone */
+.select-container {
+  position: relative;
+  width: 100%;
+  max-width: 353px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  appearance: none;
+  width: 100%;
+  height: 45px;
+  padding: 10px 40px 10px 16px;
+  background: #fff;
+  border: 1px solid #D8DADC;
+  border-radius: 10px;
+  font-family: 'Inter';
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.select-wrapper select:focus {
+  outline: none;
+  border: 2px solid #FFA500; /* laranja */
+}
+
+.select-pagamento {
+  color: D8DADC; /* mesma cor dos inputs */
+}
+
+.select-pagamento option {
+  color: D8DADC;
+}
+
+
+
+.custom-select-icon {
+  position: absolute;
+  pointer-events: none;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  fill: rgba(0, 0, 0, 0.4);
+}
+
+.input-group input:focus {
+  outline: none;
+  border: 2px solid #FFA500;
+}
+
+
+
+/* Checkbox de termos */
+.terms-checkbox {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  color: #000000;
+  cursor: pointer;
+  width: 100%;
+  max-width: 353px;
+}
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 1px solid #D8DADC;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox:checked {
+  background-color: #9DD549;
+  border-color: #9DD549;
+}
+
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Botão de criar conta */
+.create-account-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 353px;
+  height: 56px;
+  background: #9DD549;
+  border-radius: 10px;
+  border: none;
+  font-family: 'Inter';
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 125%;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: background-color 0.2s ease;
+}
+
+.create-account-button:hover {
+  background-color: #8BC441;
+}
+
+/* Link para login */
+.login-link {
+  text-align: center;
+  font-family: 'Inter';
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 125%;
+  color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 353px;
+}
+
+.login-link a {
+  color: #9DD549;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .back-button {
+    left: 15px;
+    top: 40px;
+  }
+  
+  .form-container {
+    padding: 0 15px;
+    margin-top: 50px;
+  }
+}

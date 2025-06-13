@@ -64,7 +64,7 @@
 <script>
 import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
-import '../css/style.css';
+import '../css/Component.css';
 
 export default {
   name: 'EmailSender',
@@ -153,5 +153,5 @@ export default {
 };
 </script>
 <style>
-@import '../css/style.css';
+@import '../css/Component.css';
 </style>

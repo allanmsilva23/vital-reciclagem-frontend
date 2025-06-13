@@ -31,6 +31,16 @@ const routes = [
     name: 'certificado',
     component: CertificatePage
   },
+  {
+    path: '/lista-clientes',
+    name: 'lista-clientes',
+    component: () => import('../views/ClientsListView.vue')
+  },
+  {
+    path: '/lista-produtos',
+    name: 'lista-produtos',
+    component: () => import('../views/StockView.vue')
+  }
 ]
 
 const router = createRouter({

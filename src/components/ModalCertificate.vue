@@ -61,7 +61,7 @@
 import { ref } from 'vue'
 import jsPDF from 'jspdf'
 import logo from '../assets/logo.png'
-import '../css/style.css'
+import '../css/Component.css'
 
 
 
@@ -178,7 +178,7 @@ function generatePDF() {
 </script>
 
 <style>
-@import '../css/style.css'
+@import '../css/Component.css'
 
 </style>
 
