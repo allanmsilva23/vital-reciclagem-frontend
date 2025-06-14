@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import Cadastro from '../views/Cadastro.vue'
 import Login from '../views/Login.vue'
-import Usuarios from '../views/UsuariosView.vue'
-import Estoque from '../views/EstoqueView.vue'
+import EmailPage from '../views/EmailView.vue'
+import CertificatePage from '../views/CertificateView.vue'
+import StockPage from '../views/StockView.vue'
 
 const routes = [
   {
@@ -21,16 +22,26 @@ const routes = [
     name: 'login',
     component: Login
   },
-  // Novas rotas:
-  {
-    path: '/usuarios',
-    name: 'usuarios',
-    component: Usuarios
+    {
+    path: '/enviar-email',
+    name: 'email',
+    component: EmailPage
   },
   {
-    path: '/estoque',
-    name: 'estoque',
-    component: Estoque
+    path: '/criar-certificado',
+    name: 'certificado',
+    component: CertificatePage
+  },
+  {
+    path: '/lista-clientes',
+    name: 'lista-clientes',
+    component: () => import('../views/ClientsListView.vue')
+  },
+  {
+    path: '/lista-produtos',
+    name: 'lista-produtos',
+    component: () => import('../views/StockView.vue')
+
   }
 ]
 
