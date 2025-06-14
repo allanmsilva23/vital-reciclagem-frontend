@@ -4,6 +4,7 @@ import Cadastro from '../views/Cadastro.vue'
 import Login from '../views/Login.vue'
 import EmailPage from '../views/EmailView.vue'
 import CertificatePage from '../views/CertificateView.vue'
+import StockPage from '../views/StockView.vue'
 
 const routes = [
   {
@@ -16,7 +17,7 @@ const routes = [
     name: 'cadastro',
     component: Cadastro
   },
-    {
+  {
     path: '/login',
     name: 'login',
     component: Login
@@ -40,6 +41,7 @@ const routes = [
     path: '/lista-produtos',
     name: 'lista-produtos',
     component: () => import('../views/StockView.vue')
+
   }
 ]
 

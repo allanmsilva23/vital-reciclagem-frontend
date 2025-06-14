@@ -11,6 +11,8 @@
       </p>
       <router-link to="/login" class="login-btn">Fazer login</router-link>
       <router-link to="/cadastro" class="register-btn">Criar conta</router-link>
+      <router-link to="/estoque" class="nav-btn">Página Estoque</router-link>
+      <router-link to="/usuarios" class="nav-btn">Página Usuários</router-link>
     </div>
   </div>
 </template>
@@ -18,7 +20,6 @@
 <script setup>
 import '../css/Home.css'
 </script>
-
 <style scoped>
 @import '../css/Home.css'
 </style>
