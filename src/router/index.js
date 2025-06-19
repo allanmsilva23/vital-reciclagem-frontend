@@ -4,7 +4,8 @@ import Cadastro from '../views/Cadastro.vue'
 import Login from '../views/Login.vue'
 import EmailPage from '../views/EmailView.vue'
 import CertificatePage from '../views/CertificateView.vue'
-import StockPage from '../views/StockView.vue'
+import StockView from '../views/StockView.vue'
+import ClientsView from '../views/ClientsListView.vue'
 
 const routes = [
   {
@@ -35,13 +36,12 @@ const routes = [
   {
     path: '/lista-clientes',
     name: 'lista-clientes',
-    component: () => import('../views/ClientsListView.vue')
+    component: ClientsView
   },
   {
-    path: '/lista-produtos',
-    name: 'lista-produtos',
-    component: () => import('../views/StockView.vue')
-
+    path: '/lista-estoques',
+    name: 'lista-estoques',
+    component: StockView
   }
 ]
 

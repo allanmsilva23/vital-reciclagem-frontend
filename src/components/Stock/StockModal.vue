@@ -11,7 +11,7 @@
             v-model.trim="formData.name" 
             required 
             class="form-input"
-            placeholder="Digite o nome do produto"
+            placeholder="Digite o nome do Estoque"
           >
         </div>
         
@@ -84,7 +84,6 @@ export default {
     initialData: {
       handler(newVal) {
         this.formData = { ...newVal };
-        // Formata a data para o input (removendo timezone se necessário)
         if (this.formData.end_date && this.formData.end_date.includes('T')) {
           this.formData.end_date = this.formData.end_date.split('T')[0];
         }
