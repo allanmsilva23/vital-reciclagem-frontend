@@ -201,14 +201,6 @@
   opacity: 0.8;
 }
 
-.status-ok {
-  background: #B2FFB4;
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #0F9816 !important;
-  display: inline-block;
-  text-align: center;
-}
 
 .status-alerta {
   background: rgba(250, 243, 61, 0.48);
@@ -551,6 +543,48 @@
   text-align: center;
   display: inline-block;
   width: 100%;
+}
+
+/* Estilos para os botões de ação */
+.col-edit {
+  width: 120px; /* Largura fixa para a coluna de ações */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-icon {
+  background: none !important;
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.btn-icon:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.btn-icon:hover svg path[fill="#718096"] {
+  fill: #4B5563;
+}
+
+.btn-icon:hover svg path[stroke="#718096"] {
+  stroke: #4B5563;
 }
 
 body {

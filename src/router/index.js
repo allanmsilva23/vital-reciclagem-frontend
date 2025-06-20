@@ -6,6 +6,7 @@ import EmailPage from '../views/EmailView.vue'
 import CertificatePage from '../views/CertificateView.vue'
 import StockView from '../views/StockView.vue'
 import ClientsView from '../views/ClientsListView.vue'
+import ProductsView from '../views/ProductsView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/lista-estoques',
     name: 'lista-estoques',
     component: StockView
+  },
+  {
+    path: '/lista-produtos',
+    name: 'lista-produtos',
+    component: ProductsView
   }
 ]
 
