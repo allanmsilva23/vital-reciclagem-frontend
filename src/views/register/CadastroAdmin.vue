@@ -7,26 +7,26 @@
     </button>
 
     <div class="form-container">
-      <h1 class="title">Cadastro de Clientes</h1>
+      <h1 class="title">Cadastro de Administrador</h1>
 
       <form @submit.prevent="criarConta" style="width: 100%;">
         <div class="input-group">
-          <label for="empresa-nome">Nome da empresa</label>
-          <input id="empresa-nome" type="text" placeholder="Nome da empresa" v-model="empresa.name" required />
+          <label for="admin-nome">Nome</label>
+          <input id="admin-nome" type="text" placeholder="Nome do administrador" v-model="admin.name" required />
         </div>
 
         <div class="input-group">
-          <label for="empresa-email">Email</label>
-          <input id="empresa-email" type="email" placeholder="Email da empresa" v-model="empresa.email" required />
+          <label for="admin-email">Email</label>
+          <input id="admin-email" type="email" placeholder="Email do administrador" v-model="admin.email" required />
         </div>
 
         <div class="input-group password-input">
-          <label for="empresa-senha">Senha</label>
+          <label for="admin-senha">Senha</label>
           <input
-            id="empresa-senha"
+            id="admin-senha"
             :type="showPassword ? 'text' : 'password'"
             placeholder="Senha"
-            v-model="empresa.password"
+            v-model="admin.password"
             required
           />
           <button class="toggle-password" @click.prevent="togglePassword" tabindex="-1" type="button">
@@ -43,28 +43,13 @@
         </div>
 
         <div class="input-group">
-          <label for="empresa-pagamento">Tipo de pagamento</label>
-          <select id="empresa-pagamento" v-model="empresa.payment_method" required>
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao">Cartão</option>
-            <option value="pix">PIX</option>
-            <option value="produto">Produto</option>
+          <label for="admin-level">Nível de Administrador</label>
+          <select id="admin-level" v-model="admin.level" required>
+            <option disabled value="">Selecione o nível</option>
+            <option value= "MASTER" >Master</option>
+            <option value= "PLENO" >Pleno</option>
+            <option value= "JUNIOR" >Junior</option>
           </select>
-        </div>
-
-        <div class="input-group">
-          <label for="empresa-cnpj">CNPJ</label>
-          <input id="empresa-cnpj" type="text" placeholder="CNPJ válido da empresa" v-model="empresa.cnpj" required />
-        </div>
-
-        <div class="input-group">
-          <label for="empresa-data">Data de abertura da empresa</label>
-          <input id="empresa-data" type="text" placeholder="DD/MM/AAAA" v-model="empresa.opening_date" required />
-        </div>
-
-        <div class="input-group">
-          <label for="empresa-endereco">Endereço</label>
-          <input id="empresa-endereco" type="text" placeholder="Endereço da empresa" v-model="empresa.address" required />
         </div>
 
         <div class="terms-checkbox">
@@ -85,7 +70,7 @@
 
       <div class="login-link">
         <span>Já tem uma conta?</span>
-        <router-link to="/login">Fazer login</router-link>
+        <router-link to="/login-admin">Fazer login</router-link>
       </div>
     </div>
   </div>
@@ -94,24 +79,19 @@
 <script>
 import axios from 'axios';
 const API_URL = import.meta.env.VITE_API_URL;
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import '../css/Cadastro.css';
+import '../../css/Cadastro.css';
 
 export default {
-  name: 'CadastroView',
+  name: 'CadastroAdminView',
   data() {
     return {
       showPassword: false,
       aceitouTermos: false,
-      empresa: {
+      admin: {
         name: '',  
         email: '',
-        password: '',  
-        payment_method: 'dinheiro', 
-        cnpj: '',
-        opening_date: '',  
-        address: ''  
+        password: '',
+        level: ''
       },
       loading: false,
       error: null
@@ -131,23 +111,14 @@ export default {
       this.error = null;
 
       try {
-        if (!this.empresa.opening_date) {
-          throw new Error('Data de abertura é obrigatória');
-        }
-
-        const dadosParaEnviar = {
-          ...this.empresa,
-          opening_date: this.formatarData(this.empresa.opening_date)
-        };
-
-        const response = await axios.post(`${API_URL}/clients`, dadosParaEnviar, {
+        const response = await axios.post(`${API_URL}/admin/`, this.admin, {
           headers: {
             'Content-Type': 'application/json'
           }
         });
         
         console.log('Cadastro realizado com sucesso:', response.data);
-        this.$router.push('/login'); 
+        this.$router.push('/login-admin'); 
       } catch (error) {
         console.error('Erro no cadastro:', error);
         if (error.response) {
@@ -163,19 +134,12 @@ export default {
         this.loading = false;
       }
     },
-    formatarData(data) {
-      if (!data) return '';
-      const [dd, mm, yyyy] = data.split('/');
-      return `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}`;
-    },
     voltar() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     }
   }
 }
 </script>
-
-
 <style scoped>
-@import '../css/Cadastro.css';
+@import '../../css/Cadastro.css';
 </style>

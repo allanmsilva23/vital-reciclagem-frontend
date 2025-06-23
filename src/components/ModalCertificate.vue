@@ -30,8 +30,8 @@
         </label>
 
         <label>
-            CNPJ:
-            <input type="text"  v-model="form.cnpj" required />
+          CNPJ:
+          <input type="text" v-model="form.cnpj" required />
         </label>
 
         <fieldset>
@@ -56,14 +56,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref } from 'vue'
 import jsPDF from 'jspdf'
-import logo from '../assets/logo.png'
+import backLogo from '../assets/logo.png'
 import '../css/Component.css'
-
-
 
 const emit = defineEmits(['close'])
 
@@ -96,47 +93,49 @@ function close() {
 
 function generatePDF() {
   const doc = new jsPDF()
-  
-  const img = new Image()
-  img.src = logo
 
-  img.onload = function () {
-    const canvas = document.createElement('canvas')
-    canvas.width = img.width
-    canvas.height = img.height
-    const ctx = canvas.getContext('2d')
-    ctx.drawImage(img, 0, 0)
+  const backgroundLogo = new Image()
+  backgroundLogo.src = backLogo
 
-    const imgData = canvas.toDataURL('../assets/logo.png', 'image/png')
+  backgroundLogo.onload = () => {
+    doc.addImage(backLogo, 'PNG', 0, 75, 210, 297)
+    renderPDF(doc)
+  }
 
-    doc.addImage(imgData, 'PNG', 20, 10, 40, 20) 
-    }
+  background.onerror = () => {
+    console.warn('Imagem de fundo não carregada. Gerando PDF sem imagem.')
+    renderPDF(doc)
+  }
+}
+
+function renderPDF(doc) {
+  doc.setTextColor('#4D3E3E') // Cor do texto
 
   doc.setFontSize(18)
-  doc.setFont("helvetica", "bold")
-  doc.text("Vital Reciclagem", 20, 15)
+  doc.setFont('helvetica', 'bold')
+  doc.text('Vital Reciclagem', 20, 15)
 
   doc.setFontSize(10)
-  doc.setFont("helvetica", "normal")
-  doc.text("CNPJ: 16.948.339/0001-54", 150, 20)
-  doc.text("Licença Cetesb: 100-217884-4", 150, 25)
-  doc.text("E-mail: contato@vitalreciclagem.com", 150, 30)
-  doc.text("Tels.: 11 2707-3696 / 11 94794-5346", 150, 35)
+  doc.setFont('helvetica', 'normal')
+  doc.text('CNPJ: 16.948.339/0001-54', 150, 20)
+  doc.text('Licença Cetesb: 100-217884-4', 150, 25)
+  doc.text('E-mail: contato@vitalreciclagem.com', 150, 30)
+  doc.text('Tels.: 11 2707-3696 / 11 94794-5346', 150, 35)
 
   let y = 45
   doc.setFontSize(12)
-  doc.text("Certificamos para os devidos fins que os resíduos de óleo de fritura usado foram entregues", 20, y)
+  doc.text('Certificamos para os devidos fins que os resíduos de óleo de fritura usado foram entregues', 20, y)
   y += 6
-  doc.text("à Vital Reciclagem para fabricação de biodiesel, conforme legislação vigente.", 20, y)
+  doc.text('à Vital Reciclagem para fabricação de biodiesel, conforme legislação vigente.', 20, y)
   y += 6
-  doc.text("A Vital Reciclagem está ciente das obrigações previstas na Lei Federal nº 9.605 de 12/02/2015", 20, y)
+  doc.text('A Vital Reciclagem está ciente das obrigações previstas na Lei Federal nº 9.605 de 12/02/2015', 20, y)
   y += 6
-  doc.text("(Lei de Crimes Ambientais), atendendo a todas as legislações específicas municipais e estaduais.", 20, y)
+  doc.text('(Lei de Crimes Ambientais), atendendo a todas as legislações específicas municipais e estaduais.', 20, y)
 
   y += 12
   doc.setFontSize(16)
-  doc.setFont("helvetica", "normal")
-  doc.text("Dados do Cliente", 20, y)
+  doc.setFont('helvetica', 'normal')
+  doc.text('Dados do Cliente', 20, y)
 
   doc.setFontSize(12)
   y += 10
@@ -151,7 +150,7 @@ function generatePDF() {
   doc.text(`CNPJ: ${form.value.cnpj}`, 20, y)
 
   y += 10
-  doc.text("Produtos:", 20, y)
+  doc.text('Produtos:', 20, y)
   y += 8
 
   form.value.produtos.forEach(produto => {
@@ -166,11 +165,11 @@ function generatePDF() {
   doc.text('EMPRESA', 30, y + 6)
 
   doc.text('_________________________________', 120, y)
-  doc.text('FORNECEDOR ', 130, y + 6)
+  doc.text('FORNECEDOR', 130, y + 6)
 
   doc.setFontSize(9)
-  doc.text("@vitalreciclagem", 20, 280)
-  doc.text("www.vitalreciclagem.com", 150, 280)
+  doc.text('@vitalreciclagem', 20, 280)
+  doc.text('www.vitalreciclagem.com', 150, 280)
 
   doc.save('CertificadoVital.pdf')
   close()
@@ -178,7 +177,5 @@ function generatePDF() {
 </script>
 
 <style>
-@import '../css/Component.css'
-
+@import '../css/Component.css';
 </style>
-

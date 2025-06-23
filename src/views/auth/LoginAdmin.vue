@@ -7,7 +7,7 @@
         </svg>
       </button>
 
-      <h1 class="login-title">Login de Clientes</h1>
+      <h1 class="login-title">Login de Administrador</h1>
 
       <form @submit.prevent="fazerLogin" style="width: 100%;">
         <div class="input-group">
@@ -78,16 +78,6 @@
           </button>
         </div>
       </form>
-
-      <div class="register-link" style="margin-top: 1.5rem;">
-        <span>Não tem conta?</span>
-        <router-link 
-          to="/cadastro"
-          :class="{ 'disabled-link': loading }"
-        >
-          Criar conta
-        </router-link>
-      </div>
     </div>
   </div>
 </template>
@@ -95,7 +85,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import '../css/Login.css'
+import '@/css/Login.css'
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -127,30 +117,31 @@ async function fazerLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await fetch(`${API_URL}/clients/login`, {
+    const response = await fetch(`${API_URL}/admin/login-admin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         email: credenciais.email,
         password: credenciais.senha
-      }),
-      credentials: 'include' 
+      })
     })
 
-    const data = await response.json()
-
     if (!response.ok) {
-      throw new Error(data.error || 'Erro ao fazer login')
+      const errorData = await response.json()
+      throw new Error(errorData.error || 'Erro ao fazer login')
     }
 
-    // Armazena os dados do usuário
-    localStorage.setItem('client', JSON.stringify(data.client))
-    router.push('/dashboard')
+    const data = await response.json()
+    
+    localStorage.setItem('admin', JSON.stringify(data.admin))
+    
+    router.push('/')
     
   } catch (error) {
-    errorMessage.value = error.message || 'Credenciais inválidas'
+    errorMessage.value = error.message || 'Erro ao conectar com o servidor'
     console.error('Erro no login:', error)
   } finally {
     loading.value = false
@@ -159,6 +150,5 @@ async function fazerLogin() {
 </script>
 
 <style scoped>
-@import '../css/Login.css'
-
+@import '@/css/Login.css'
 </style>

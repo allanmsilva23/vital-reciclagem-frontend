@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import Cadastro from '../views/Cadastro.vue'
-import Login from '../views/Login.vue'
+import Cadastro from '../views/register/Cadastro.vue'
+import CadastroAdmin from '../views/register/CadastroAdmin.vue'
 import EmailPage from '../views/EmailView.vue'
 import CertificatePage from '../views/CertificateView.vue'
 import StockView from '../views/StockView.vue'
 import ClientsView from '../views/ClientsListView.vue'
 import ProductsView from '../views/ProductsView.vue'
+import LoginAdmin from '../views/auth/LoginAdmin.vue'
+import LoginClient from '../views/auth/LoginClient.vue'
 
 const routes = [
   {
@@ -20,9 +22,19 @@ const routes = [
     component: Cadastro
   },
   {
+    path: '/cadastro-admin',
+    name: 'cadastro-admin',
+    component: CadastroAdmin
+  },
+  {
     path: '/login',
     name: 'login',
-    component: Login
+    component: LoginClient
+  },
+  {
+    path: '/login-admin',
+    name: 'login-admin',
+    component: LoginAdmin
   },
     {
     path: '/enviar-email',
