@@ -11,8 +11,9 @@
       </p>
       <router-link to="/login" class="login-btn">Fazer login</router-link>
       <router-link to="/cadastro" class="register-btn">Criar conta</router-link>
-      <router-link to="/estoque" class="nav-btn">Página Estoque</router-link>
-      <router-link to="/usuarios" class="nav-btn">Página Usuários</router-link>
+      <router-link to="/lista-estoques" class="nav-btn">Página Estoque</router-link>
+      <router-link to="/lista-produtos" class="nav-btn">Página Produtos</router-link>
+      <router-link to="/lista-clientes" class="nav-btn">Página Usuários</router-link>
     </div>
   </div>
 </template>

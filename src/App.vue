@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import '@/css/Global.css';
+
 export default {
   name: 'App'
 }

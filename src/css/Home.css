@@ -1,8 +1,9 @@
 .container {
   position: relative;
   width: 100vw;
-  height: 100vh;
-  background: #F7FEF2;  overflow: hidden;
+  min-height: 100vh; /* Permite crescer conforme o conteúdo */
+  background: #F7FEF2;
+  overflow-x: hidden; /* Mantém o scroll horizontal oculto, mas permite scroll vertical */
   font-family: 'Inter', sans-serif;
 }
 
@@ -32,14 +33,14 @@
 
 /* Conteúdo */
 .content {
-  position: absolute;
-  top: 570px;
+  position: relative; /* Deixa fluir no fluxo da página */
+  margin-top: 570px; /* Substitui position: absolute e top */
   width: 100%;
   max-width: 393px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  padding: 0 20px;
+  padding: 0 20px 60px; /* Espaço inferior para evitar que conteúdo fique colado ao rodapé */
   z-index: 1;
 }
 
@@ -62,53 +63,76 @@
 }
 
 /* Botões */
+/* Botão de login (verde preenchido) */
 .login-btn {
   display: block;
-  text-align: center;
-  text-decoration: none;
   width: 100%;
   padding: 17px 0;
-  background-color: #9DD549;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
+  border: 2px solid #6BB200;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #6BB200;
   font-weight: 600;
   font-size: 20px;
-  margin-bottom: 16px;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+.login-btn:hover {
+  background-color: #6BB200;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 178, 0, 0.3);
 }
 
+/* Botão de registro (borda verde) */
 .register-btn {
   display: block;
   width: 100%;
   padding: 17px 0;
-  border: 1px solid #6BB200;
-  border-radius: 10px;
+  border: 2px solid #6BB200;
+  border-radius: 12px;
+  background-color: transparent;
   color: #6BB200;
   font-weight: 600;
   font-size: 20px;
-  background-color: transparent;
-  cursor: pointer;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+.register-btn:hover {
+  background-color: #6BB200;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 178, 0, 0.3);
+}
+
+/* Botão de navegação */
 .nav-btn {
   display: block;
   width: 100%;
   padding: 14px 0;
   margin-top: 12px;
   border: 2px solid #6BB200;
-  border-radius: 10px;
+  border-radius: 12px;
+  background-color: transparent;
+  color: #6BB200;
   font-weight: 600;
   font-size: 18px;
-  background-color: transparent;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  color: #6BB200;
+  transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
+  background-color: #6BB200;
   color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(107, 178, 0, 0.2);
 }
+

@@ -55,7 +55,7 @@
     />
 
         <button class="new-product-btn" >
-          <router-link to="/cadastro" class="new-product-btn">
+          <router-link to="/lista-produtos" class="new-product-btn">
             <span>Ver Todos Produtos...</span>
           </router-link>        
         </button>
