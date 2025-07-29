@@ -90,14 +90,14 @@
       </div>
     </div>
   </div>
-</template>
+  </template>
 
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import '@/css/Login.css'
-
-const API_URL = import.meta.env.VITE_API_URL;
+import axios from '@/utils/axios.js' 
+import { jwtDecode } from 'jwt-decode';
 
 const credenciais = reactive({
   email: '',
@@ -127,32 +127,33 @@ async function fazerLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await fetch(`${API_URL}/clients/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: credenciais.email,
-        password: credenciais.senha
-      }),
-      credentials: 'include' 
+    const response = await axios.post('/clients/login', { 
+      email: credenciais.email,
+      password: credenciais.senha
     })
 
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Erro ao fazer login')
-    }
-
-    localStorage.setItem('client', JSON.stringify(data.client))
-    router.push('/dashboard')
+    const data = response.data
     
+   const decodedToken = jwtDecode(data.access_token);
+    
+    localStorage.setItem('access_token', data.access_token);
+    localStorage.setItem('user_id', decodedToken.id); 
+    localStorage.setItem('user_role', decodedToken.role || 'client');
+    
+    console.log('Login bem-sucedido! Token JWT do Cliente:', data.access_token);
+    console.log('Dados decodificados do Token:', decodedToken);
+    
+    router.push('/dashboard-client') 
+
   } catch (error) {
-    errorMessage.value = error.message || 'Credenciais inválidas'
-    console.error('Erro no login:', error)
+    if (error.response && error.response.data && error.response.data.error) {
+      errorMessage.value = error.response.data.error;
+    } else {
+      errorMessage.value = 'Erro ao fazer login. Verifique sua conexão ou credenciais.';
+    }
+    console.error('Erro de login:', error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
