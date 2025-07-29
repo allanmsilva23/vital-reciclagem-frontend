@@ -1,0 +1,44 @@
+/*ERROR 404*/
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #FFFFFF;
+  color: #4D3E3E;
+  font-family: 'Inter', 'Poppins', Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 3em;
+  color: #9DD549; /* Verde principal */
+  margin-bottom: 10px;
+  font-family: 'Poppins', 'Inter', Arial, sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.home-button {
+  background-color: #9DD549; /* Verde principal */
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.home-button:hover {
+  background-color: #8BC441;
+}

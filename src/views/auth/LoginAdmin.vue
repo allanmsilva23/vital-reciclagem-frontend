@@ -86,8 +86,8 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import '@/css/Login.css'
-
-const API_URL = import.meta.env.VITE_API_URL;
+import axios from '@/utils/axios.js' 
+import { jwtDecode } from 'jwt-decode';
 
 const credenciais = reactive({
   email: '',
@@ -117,34 +117,32 @@ async function fazerLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await fetch(`${API_URL}/admin/login-admin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        email: credenciais.email,
-        password: credenciais.senha
-      })
+    const response = await axios.post('/admin/login-admin', { 
+      email: credenciais.email,
+      password: credenciais.senha
     })
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || 'Erro ao fazer login')
-    }
+    const data = response.data 
+    
+    const decodedToken = jwtDecode(data.access_token);
+    
+    localStorage.setItem('access_token', data.access_token);
+    localStorage.setItem('user_id', decodedToken.id); 
+    localStorage.setItem('user_role', decodedToken.role); 
+    localStorage.setItem('user_level', decodedToken.level); 
+    
+    console.log('Login bem-sucedido! Token JWT do Admin:', data.access_token);
+    router.push('/lista-clientes') 
 
-    const data = await response.json()
-    
-    localStorage.setItem('admin', JSON.stringify(data.admin))
-    
-    router.push('/')
-    
   } catch (error) {
-    errorMessage.value = error.message || 'Erro ao conectar com o servidor'
-    console.error('Erro no login:', error)
+    if (error.response && error.response.data && error.response.data.error) {
+      errorMessage.value = error.response.data.error;
+    } else {
+      errorMessage.value = 'Erro ao fazer login. Verifique sua conexão ou credenciais.';
+    }
+    console.error('Erro de login:', error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
