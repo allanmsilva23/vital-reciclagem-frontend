@@ -1,138 +1,211 @@
-.container {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh; /* Permite crescer conforme o conteúdo */
-  background: #F7FEF2;
-  overflow-x: hidden; /* Mantém o scroll horizontal oculto, mas permite scroll vertical */
-  font-family: 'Inter', sans-serif;
+.modern-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* fundo superior */
-.top-bg {
-  position: absolute;
-  width: 100vw;
-  height: 550px;
-  top: -40px;
-  left: 0;
-  background-image: url('@/assets/bg-fundo.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 0;
+.hero-section {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f9f0 0%, #e8f5e9 100%);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(107, 178, 0, 0.1);
+}
+
+.logo-container {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  width: 100%;           
 }
 
 .logo {
-  position: absolute;
-  width: 493px;
-  height: 493px;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  object-fit: contain;
-}
-
-/* Conteúdo */
-.content {
-  position: relative; /* Deixa fluir no fluxo da página */
-  margin-top: 570px; /* Substitui position: absolute e top */
-  width: 100%;
-  max-width: 393px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  padding: 0 20px 60px; /* Espaço inferior para evitar que conteúdo fique colado ao rodapé */
-  z-index: 1;
+  max-width: 250px;      
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  display: block;       
+  margin: 0 auto;        
 }
 
 .title {
   font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 130%;
-  color: #4D3E3E;
-  letter-spacing: -0.01em;
-  margin-bottom: 10px;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0 auto 20px; /* Centered the title */
+  line-height: 1.2;
+  text-align: center; /* Ensure text is centered */
+  width: 100%;
+}
+
+.highlight {
+  color: #6BB200;
+  position: relative;
+  display: inline-block;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(107, 178, 0, 0.2);
+  z-index: -1;
+  border-radius: 4px;
 }
 
 .subtitle {
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 125%;
-  color: rgba(0, 0, 0, 0.7);
-  margin-bottom: 40px;
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0 auto 30px;
+  max-width: 600px;
+  line-height: 1.6;
 }
 
-/* Botões */
-/* Botão de login (verde preenchido) */
-.login-btn {
-  display: block;
+.action-section {
+  max-width: 400px;
+  margin: 0 auto;
   width: 100%;
-  padding: 17px 0;
-  border: 2px solid #6BB200;
+}
+
+.main-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 18px 24px;
   border-radius: 12px;
-  background-color: transparent;
-  color: #6BB200;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 1.1rem;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  margin-bottom: 16px;
   transition: all 0.3s ease;
-  margin-bottom: 12px;
-}
-.login-btn:hover {
-  background-color: #6BB200;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(107, 178, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Botão de registro (borda verde) */
-.register-btn {
-  display: block;
-  width: 100%;
-  padding: 17px 0;
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  fill: currentColor;
+}
+
+.primary-btn {
+  background-color: #6BB200;
+  color: white;
   border: 2px solid #6BB200;
-  border-radius: 12px;
-  background-color: transparent;
-  color: #6BB200;
-  font-weight: 600;
-  font-size: 20px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.register-btn:hover {
-  background-color: #6BB200;
-  color: #fff;
+.primary-btn:hover {
+  background-color: #5a9a00;
+  border-color: #5a9a00;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(107, 178, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(107, 178, 0, 0.2);
 }
 
-/* Botão de navegação */
-.nav-btn {
-  display: block;
-  width: 100%;
-  padding: 14px 0;
-  margin-top: 12px;
+.secondary-btn {
+  background: white;
+  color: #6BB200;
   border: 2px solid #6BB200;
-  border-radius: 12px;
-  background-color: transparent;
-  color: #6BB200;
-  font-weight: 600;
-  font-size: 18px;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.nav-btn:hover {
-  background-color: #6BB200;
-  color: #fff;
+.secondary-btn:hover {
+  background: #f8fff0;
+  color: #5a9a00;
+  border-color: #5a9a00;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(107, 178, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(107, 178, 0, 0.1);
 }
 
+.divider {
+  position: relative;
+  margin: 30px 0;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.divider-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 0 15px;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.collab-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6BB200;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.user-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  fill: currentColor;
+}
+
+.collab-link:hover {
+  color: #5a9a00;
+  background-color: #f8fff0;
+}
+
+.action-section .main-btn.selected {
+  border: 2px solid #6BB200;
+  background: #f8fff0;
+  color: #6BB200;
+  font-weight: 700;
+}
+
+.action-section .main-btn.selected.primary-btn {
+  background: #e8f5e9;
+  color: #6BB200;
+}
+
+.action-section .main-btn.selected.secondary-btn {
+  background: #f8fff0;
+  color: #6BB200;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+    margin-bottom: 25px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .hero-section {
+    padding: 30px 15px;
+    border-radius: 15px;
+  }
+  
+  .logo {
+    max-width: 200px; /* Adjusted for mobile */
+  }
+}

@@ -75,12 +75,11 @@
             class="form-input"
           >
             <option value="">Selecione um método</option>
-            <option value="credit_card">Cartão de Crédito</option>
-            <option value="debit_card">Cartão de Débito</option>
-            <option value="pix">PIX</option>
-            <option value="bank_slip">Boleto Bancário</option>
-            <option value="cash">Dinheiro</option>
-            <option value="product">Produto</option>
+            <option value="Credito">Cartão de Crédito</option>
+            <option value="Debito">Cartão de Débito</option>
+            <option value="Pix">PIX</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Produto">Produto</option>
           </select>
         </div>
         <div class="modal-actions">

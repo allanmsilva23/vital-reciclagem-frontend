@@ -4,5 +4,5 @@
     </div> 
 </template>   
 <script setup>
-import ModalCertificate from '../components/ModalCertificate.vue';
+import ModalCertificate from '@/components/ModalCertificate.vue';
 </script>

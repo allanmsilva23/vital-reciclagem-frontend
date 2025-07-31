@@ -39,10 +39,7 @@
   background-color: #9dd549; /* Cor de hover opcional */
 }
 
-.export-pdf,
-.export-excel {
-  color: white !important;
-}
+
 
 .header {
   display: flex;
@@ -186,38 +183,26 @@
   text-align: center;
 }
 
-.action-icons {
+.btn-icon {
+  width: 52px;           /* Aumenta largura */
+  height: 52px;          /* Aumenta altura */
   display: flex;
-  gap: 15px;
+  align-items: center;
   justify-content: center;
-}
-
-.action-icons svg {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  border-radius: 10px;   /* Bordas mais suaves */
+  transition: background 0.2s;
 }
 
-.action-icons svg:hover {
-  opacity: 0.8;
+.btn-icon:hover {
+  background-color: #f0f0f0;
 }
 
-
-.status-alerta {
-  background: rgba(250, 243, 61, 0.48);
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #E69800 !important;
-  display: inline-block;
-  text-align: center;
-}
-
-.status-falta {
-  background: rgba(255, 178, 178, 0.82);
-  border-radius: 6px;
-  padding: 8px 12px;
-  color: #E91000 !important;
-  display: inline-block;
-  text-align: center;
+.btn-icon svg {
+  width: 28px;           /* Ícone maior */
+  height: 28px;
 }
 
 /* Paginação */
@@ -358,235 +343,3 @@
 }
 
 
-
-/* Classes para as colunas */
-.col-produto { flex: 2; min-width: 200px; text-align: left; }
-.col-quant { flex: 1; min-width: 80px;   text-align: center;}
-.col-status { flex: 1; min-width: 100px;  text-align: center; }
-.col-min { flex: 1; min-width: 120px;  text-align: center; }
-.col-edit { flex: 1; min-width: 100px;  text-align: center; }
-.col-data { flex: 1; min-width: 100px;   text-align: center;}
-.col-tipo { flex: 1; min-width: 100px;   text-align: center;}
-.col-dest { flex: 2; min-width: 180px;   text-align: center; }
-
-/* Estilos para mobile */
-@media (max-width: 768px) {
-  .estoque-container {
-    padding: 15px;
-    padding-bottom: 80px;
-  }
-  
-  .action-buttons, .history-buttons {
-    flex-direction: column;
-  }
-  
-  .table-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .header-row {
-    display: flex;
-    min-width: 700px;
-  }
-  
-  .product-row, .history-row {
-    display: flex;
-    min-width: 700px;
-  }
-  
-  .product-row span, .history-row span {
-    text-align: center;
-  }
-  
-  .col-produto, .col-dest {
-    text-align: center;
-  }
-  
-  .action-icons {
-    justify-content: center;
-  }
-  
-  .pagination {
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-  }
-  
-  .status-ok, .status-alerta, .status-falta {
-    padding: 6px 10px;
-  }
-}
-
-/* Estilos para desktop */
-@media (min-width: 769px) {
-  .estoque-container {
-    padding: 30px;
-    padding-bottom: 90px;
-  }
-  
-  .table-container {
-    border-radius: 12px;
-  }
-  
-  
-  .action-icons {
-    justify-content: center;
-  }
-}
-
-/* Aplica centralização ao conteúdo das colunas das tabelas */
-.table-container .header-row span,
-.table-container .product-row span,
-.table-container .history-header .header-row span,
-.table-container .history-body .history-row span {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-}
-
-/* Para as ações (ícones) também centralizarem */
-.table-container .col-edit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Garante centralização também em telas menores */
-@media (max-width: 768px) {
-  .table-container .header-row span,
-  .table-container .product-row span,
-  .table-container .history-header .header-row span,
-  .table-container .history-body .history-row span {
-    text-align: center;
-  }
-}
-
-
-/* Centraliza conteúdo das colunas nas duas tabelas */
-.table-header .header-row span,
-.table-body .product-row span,
-.history-header .header-row span,
-.history-body .history-row span,
-.col-edit {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (max-width: 768px) {
-  .table-header .header-row span,
-  .table-body .product-row span,
-  .history-header .header-row span,
-  .history-body .history-row span {
-    text-align: center !important;
-    justify-content: center;
-  }
-}
-
-
-.table-header .header-row span,
-.table-body .product-row span {
-  width: 100px;           /* Defina uma largura fixa igual para header e body */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0;             /* Remova padding que atrapalhe alinhamento */
-  margin: 0;              /* Remova margem */
-  box-sizing: border-box; /* Para evitar overflow na largura */
-}
-
-.historico-table .table-header .header-row span,
-.historico-table .table-body .product-row span {
-  width: 120px;  /* Mesma largura para a coluna data no header e no body */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.historico-table .table-header .header-row .col-data,
-.historico-table .table-body .product-row .col-data {
-  width: 120px;
-}
-
-.historico-table .table-header .header-row .col-acao,
-.historico-table .table-body .product-row .col-acao {
-  width: 150px;
-}
-
-.historico-table .table-header .header-row .col-valor,
-.historico-table .table-body .product-row .col-valor {
-  width: 100px;
-}
-
-.history-header .header-row span,
-.history-body .history-row span {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-}
-
-.history-header .header-row {
-  display: flex;
-  padding: 10px 0;
-  text-align: center;
-}
-
-.history-row span,
-.history-header .header-row span {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-}
-
-/* Estilos para os botões de ação */
-.col-edit {
-  width: 120px; /* Largura fixa para a coluna de ações */
-}
-
-.action-buttons {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-icon {
-  background: none !important;
-  background-color: transparent !important;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  border-radius: 4px;
-}
-
-.btn-icon:hover {
-  background-color: #f3f4f6;
-}
-
-.btn-icon svg {
-  width: 25px;
-  height: 25px;
-}
-
-.btn-icon:hover svg path[fill="#718096"] {
-  fill: #4B5563;
-}
-
-.btn-icon:hover svg path[stroke="#718096"] {
-  stroke: #4B5563;
-}
-
-body {
-  background-color: #f4ffec;
-}

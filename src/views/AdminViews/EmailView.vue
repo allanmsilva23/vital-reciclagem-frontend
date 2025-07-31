@@ -1,8 +1,8 @@
 <template>
     <div class="blank-page">
-        <StockTable />
+        <EmailComponent />
     </div> 
 </template>   
 <script setup>
-import StockTable from '../components/Stock/StockTable.vue';
+import EmailComponent from '@/components/EmailComponent.vue';
 </script>

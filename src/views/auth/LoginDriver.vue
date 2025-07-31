@@ -7,16 +7,16 @@
         </svg>
       </button>
 
-      <h1 class="login-title">Login de Administrador</h1>
+      <h1 class="login-title">Login de Motorista</h1>
 
       <form @submit.prevent="fazerLogin" style="width: 100%;">
         <div class="input-group">
           <label>
-            Email
+            CNH
             <input 
-              type="email" 
-              placeholder="Digite seu email" 
-              v-model="credenciais.email"
+              type="cnh" 
+              placeholder="Digite sua CNH" 
+              v-model="credenciais.cnh"
               :disabled="loading"
               required
             />
@@ -90,8 +90,7 @@ import axios from '@/utils/axios.js'
 import { jwtDecode } from 'jwt-decode';
 
 const credenciais = reactive({
-  name: '',
-  email: '',
+  cnh: '',
   senha: ''
 })
 
@@ -109,7 +108,7 @@ function voltar() {
 }
 
 async function fazerLogin() {
-  if (!credenciais.email || !credenciais.senha) {
+  if (!credenciais.cnh || !credenciais.senha) {
     errorMessage.value = 'Preencha todos os campos!'
     return
   }
@@ -118,24 +117,20 @@ async function fazerLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await axios.post('/admin/login-admin', { 
-      name: credenciais.name,
-      email: credenciais.email,
+    const response = await axios.post('/driver/login-motorista', { 
+      cnh: credenciais.cnh,
       password: credenciais.senha
     })
 
-    const data = response.data 
+    const data = response.data
     
     const decodedToken = jwtDecode(data.access_token);
     
     localStorage.setItem('access_token', data.access_token);
     localStorage.setItem('user_id', decodedToken.id); 
-    localStorage.setItem('user_name', decodedToken.name);
-    localStorage.setItem('user_role', decodedToken.role); 
-    localStorage.setItem('user_level', decodedToken.level); 
+    localStorage.setItem('user_role', decodedToken.role || 'driver');
     
-    console.log('Login bem-sucedido! Token JWT do Admin:', data.access_token);
-    router.push('/dashboard-admin') 
+    router.push('/dashboard-driver') 
 
   } catch (error) {
     if (error.response && error.response.data && error.response.data.error) {
@@ -143,7 +138,6 @@ async function fazerLogin() {
     } else {
       errorMessage.value = 'Erro ao fazer login. Verifique sua conexão ou credenciais.';
     }
-    console.error('Erro de login:', error);
   } finally {
     loading.value = false;
   }
