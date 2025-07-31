@@ -1,22 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import TypeCollaborator from '../views/auth/TypeCollaborator.vue'
 import Cadastro from '../views/register/Cadastro.vue'
 import CadastroAdmin from '../views/register/CadastroAdmin.vue'
-import EmailPage from '../views/EmailView.vue'
-import CertificatePage from '../views/CertificateView.vue'
-import StockView from '../views/StockView.vue'         
-import ClientsView from '../views/ClientsListView.vue' 
-import ProductsView from '../views/ProductsView.vue'   
+import AdminHome from '../views/AdminViews/AdminHome.vue'
+import EmailPage from '../views/AdminViews/EmailView.vue'
+import CertificatePage from '../views/AdminViews/CertificateView.vue'
+import StockView from '../views/AdminViews/StockView.vue'         
+import ProductsView from '../views/AdminViews/ProductsView.vue'   
 import LoginAdmin from '../views/auth/LoginAdmin.vue'
 import LoginClient from '../views/auth/LoginClient.vue'
+import LoginDriver from '../views/auth/LoginDriver.vue'
 import AccessDenied from '../views/errors/404.vue'
-import ClientsListView from '../views/ClientsListView.vue'
+import ClientsListView from '../views/AdminViews/ClientsListView.vue'
 
 const routes = [
+  // Rotas de autenticação e cadastro
   {
     path: '/',
     name: 'Home',
     component: HomeView
+  },
+  {
+    path: '/tipo-colaborador',
+    name: 'TypeCollaborator',
+    component: TypeCollaborator
   },
   {
     path: '/cadastro',
@@ -38,6 +46,19 @@ const routes = [
     name: 'login-admin', 
     component: LoginAdmin
   },
+  {
+    path: '/login-motorista',
+    name: 'login-motorista',
+    component: LoginDriver
+  },
+  // Rotas de usuário
+  {
+    path: '/dashboard-admin',
+    name: 'dashboard-admin',
+    component: AdminHome
+  },
+
+  // Rotas de administração
   {
     path: '/enviar-email',
     name: 'email',
@@ -73,6 +94,7 @@ const routes = [
     name: 'AccessDenied',
     component: AccessDenied
   },
+  // Rotas de erro
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

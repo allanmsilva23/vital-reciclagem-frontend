@@ -31,102 +31,96 @@
             <path d="M12 6V18M18 12H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-    <StockModal
-      :visible="showCreateModal"
-      title="Criar Novo Estoque"
-      @close="closeCreateModal"
-      @submit="handleCreateStock"
-    />
 
-    <StockModal
-      :visible="!!editStock"
-      title="Editar Estoque"
-      :initial-data="editStock"
-      confirm-button-text="Atualizar"
-      @close="cancelEdit"
-      @submit="handleUpdateStock"
-    />
+        <StockModal
+          :visible="showCreateModal"
+          title="Criar Novo Estoque"
+          @close="closeCreateModal"
+          @submit="handleCreateStock"
+        />
 
-    <DeleteStockModal
-      :visible="showDeleteModal"
-      :stockName="stockToDelete?.name"
-      @close="showDeleteModal = false"
-      @confirm="deleteStockConfirmed"
-    />
+        <StockModal
+          :visible="!!editStock"
+          title="Editar Estoque"
+          :initial-data="editStock"
+          confirm-button-text="Atualizar"
+          @close="cancelEdit"
+          @submit="handleUpdateStock"
+        />
 
-        <button class="new-product-btn" >
-          <router-link to="/lista-produtos" class="new-product-btn">
-            <span>Ver Todos Produtos...</span>
-          </router-link>        
-        </button>
+        <DeleteStockModal
+          :visible="showDeleteModal"
+          :stockName="stockToDelete?.name"
+          @close="showDeleteModal = false"
+          @confirm="deleteStockConfirmed"
+        />
+
+        <router-link to="/lista-produtos" class="new-product-btn">
+          <span>Ver Todos Produtos...</span>
+        </router-link>
       </div>
 
-    <div class="table-container">
-  <table style="width:100%; border-collapse:collapse;">
-    <thead>
-      <tr class="header-row">
-        <th class="col-produto">Estoques</th>
-        <th class="col-quant">Quantidade de Produtos</th>
-        <th class="col-status">Data de Entrada</th>
-        <th class="col-data">Data de Fechamento</th>
-        <th class="col-edit">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-if="stocks.length === 0">
-        <td colspan="5" class="text-center">Carregando produtos...</td>
-      </tr>
-      <tr v-for="stock in stocks" :key="stock.id" class="product-row">
-        <td class="col-produto">
-          <template v-if="editStock && editStock.id === stock.id">
-            <input v-model="editStock.name" class="form-input" />
-          </template>
-          <template v-else>
-            {{ stock.name || 'Sem nome' }}
-          </template>
-        </td>
-        <td class="col-quant">
-          <template v-if="editStock && editStock.id === stock.id">
-            <input v-model.number="editStock.quantity_products" type="number" class="form-input" />
-          </template>
-          <template v-else>
-            {{ stock.quantity_products || 0 }}
-          </template>
-        </td>
-        <td class="col-data">
-            {{ formatDate(stock.entry_date) }}
-        </td>
-        <td class="col-data">
-            {{ stock.end_date ? formatDate(stock.end_date) : 'N/A' }}
-        </td>
-        <td class="col-edit actions">
-          <template v-if="editStock && editStock.id === stock.id">
-            <button @click="updateStock" class="btn-save">Salvar</button>
-            <button @click="cancelEdit" class="btn-cancel">Cancelar</button>
-          </template>
-    <td class="col-edit">
-      <div class="action-buttons">
-        <button @click="startEdit(stock)" class="btn-icon" title="Editar">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z" fill="#718096"/>
-            <path d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z" fill="#718096"/>
-          </svg>
-        </button>
-        <button @click="deleteStock(stock.id)" class="btn-icon" title="Excluir">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M5 7V16C5 17.1046 5.89543 18 7 18H13C14.1046 18 15 17.1046 15 16V7" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M8 7V5C8 3.89543 8.89543 3 10 3H10.5C11.6046 3 12.5 3.89543 12.5 5V7" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M2 7H18" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr class="header-row">
+              <th>Estoques</th>
+              <th>Quantidade de Produtos</th>
+              <th>Data de Entrada</th>
+              <th>Data de Fechamento</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-if="stocks.length === 0">
+              <td colspan="5" class="text-center">Carregando produtos...</td>
+            </tr>
+            <tr v-for="stock in stocks" :key="stock.id" class="product-row">
+              <td>
+                <template v-if="editStock && editStock.id === stock.id">
+                  <input v-model="editStock.name" class="form-input" />
+                </template>
+                <template v-else>
+                  {{ stock.name || 'Sem nome' }}
+                </template>
+              </td>
+              <td>
+                <template v-if="editStock && editStock.id === stock.id">
+                  <input v-model.number="editStock.quantity_products" type="number" class="form-input" />
+                </template>
+                <template v-else>
+                  {{ stock.quantity_products || 0 }}
+                </template>
+              </td>
+              <td>{{ formatDate(stock.entry_date) }}</td>
+              <td>{{ stock.end_date ? formatDate(stock.end_date) : 'N/A' }}</td>
+              <td>
+                <template v-if="editStock && editStock.id === stock.id">
+                  <button @click="updateStock" class="btn-save">Salvar</button>
+                  <button @click="cancelEdit" class="btn-cancel">Cancelar</button>
+                </template>
+                <div class="action-buttons">
+                  <button @click="startEdit(stock)" class="btn-icon" title="Editar">
+                    <svg width="28" height="28" viewBox="0 0 20 20" fill="none">
+                      <path d="M13.5858 3.58579C14.3668 2.80474 15.6332 2.80474 16.4142 3.58579C17.1953 4.36683 17.1953 5.63316 16.4142 6.41421L15.6213 7.20711L12.7929 4.37868L13.5858 3.58579Z" fill="#718096"/>
+                      <path d="M11.3787 5.79289L3 14.1716V17H5.82842L14.2071 8.62132L11.3787 5.79289Z" fill="#718096"/>
+                    </svg>
+                  </button>
+                  <button @click="deleteStock(stock.id)" class="btn-icon" title="Excluir">
+                    <svg width="28" height="28" viewBox="0 0 20 20" fill="none">
+                      <path d="M5 7V16C5 17.1046 5.89543 18 7 18H13C14.1046 18 15 17.1046 15 16V7" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 7V5C8 3.89543 8.89543 3 10 3H10.5C11.6046 3 12.5 3.89543 12.5 5V7" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M2 7H18" stroke="#718096" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </td>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-            <!-- Paginação -->
+
+      <!-- Paginação -->
       <div class="pagination">
         <div class="page-info">
           <span>1</span>
@@ -145,37 +139,11 @@
         </div>
       </div>
     </div>
-
-          <!-- Botões de exportação gerais -->
-<div class="global-export-buttons">
-  <button class="export-pdf">Gerar PDF</button>
-  <button class="export-excel">Gerar Excel</button>
-</div>
-
-<!-- Rodapé -->
-<div class="footer">
-  <!-- Primeiro ícone SVG -->
-  <div class="footer-icon">
-    <router-link to="/">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M25 22.1134V11.6366C24.9999 11.0109 24.8571 10.3934 24.5823 9.83089C24.3076 9.26838 23.9081 8.77563 23.4141 8.38997L14.6981 1.58458C14.2133 1.20581 13.6152 1 12.9993 1C12.3835 1 11.7854 1.20581 11.3005 1.58458L2.58448 8.38859C2.09062 8.77454 1.6913 9.26757 1.41677 9.83032C1.14225 10.3931 0.999723 11.0108 1 11.6366V22.1134C1 23.7079 2.29514 25 3.89339 25H9.36328V14.0517H16.6353V25H22.1052C22.8726 25 23.6086 24.6959 24.1512 24.1545C24.6938 23.6132 25 22.879 25 22.1134Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    </router-link>
   </div>
-
-  <!-- Segundo ícone SVG -->
-  <div class="footer-icon">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22.7177 5.80456C24.0444 5.80456 25.12 4.72902 25.12 3.40228C25.12 2.07554 24.0444 1 22.7177 1C21.391 1 20.3154 2.07554 20.3154 3.40228C20.3154 4.72902 21.391 5.80456 22.7177 5.80456Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M16.3802 2.05249H7.29739C3.53382 2.05249 1.2002 4.71787 1.2002 8.48143V18.5825C1.2002 22.346 3.48807 25 7.29739 25H18.0504C21.814 25 24.1476 22.346 24.1476 18.5825V9.78552" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path opacity="0.4" d="M6.78271 16.626L10.5234 11.7644L14.7903 15.1161L18.451 10.3916" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-</div>
-</div>
-
 
 </template>
+
+
 <script>
 import StockModal from '@/components/Stock/StockModal.vue';
 import DeleteStockModal from '@/components/Stock/StockDelete.vue';

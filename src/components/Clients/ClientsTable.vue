@@ -66,6 +66,7 @@
               <th class="col-nome">Nome</th>
               <th class="col-email">E-mail</th>
               <th class="col-address">Endereço</th>
+              <th class="col-nome">Forma de Pagamento</th>
               <th class="col-edit">Ações</th>
             </tr>
           </thead>
@@ -82,6 +83,9 @@
               </td>
               <td class="col-address">
                 {{ client.address || '-' }}
+              </td>
+              <td class="col-nome">
+                {{ client.payment_method || '-' }}
               </td>
             <td class="col-edit">
     <div class="action-buttons">
@@ -122,30 +126,6 @@
             </svg>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Botões de exportação -->
-    <div class="global-export-buttons">
-      <button class="export-pdf">Gerar PDF</button>
-      <button class="export-excel">Gerar Excel</button>
-    </div>
-
-    <!-- Rodapé -->
-    <div class="footer">
-      <div class="footer-icon">
-        <router-link to="/">
-          <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-            <path d="M25 22.1134V11.6366C24.9999 11.0109 24.8571 10.3934 24.5823 9.83089C24.3076 9.26838 23.9081 8.77563 23.4141 8.38997L14.6981 1.58458C14.2133 1.20581 13.6152 1 12.9993 1C12.3835 1 11.7854 1.20581 11.3005 1.58458L2.58448 8.38859C2.09062 8.77454 1.6913 9.26757 1.41677 9.83032C1.14225 10.3931 0.999723 11.0108 1 11.6366V22.1134C1 23.7079 2.29514 25 3.89339 25H9.36328V14.0517H16.6353V25H22.1052C22.8726 25 23.6086 24.6959 24.1512 24.1545C24.6938 23.6132 25 22.879 25 22.1134Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </router-link>
-      </div>
-      <div class="footer-icon">
-        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-          <path d="M22.7177 5.80456C24.0444 5.80456 25.12 4.72902 25.12 3.40228C25.12 2.07554 24.0444 1 22.7177 1C21.391 1 20.3154 2.07554 20.3154 3.40228C20.3154 4.72902 21.391 5.80456 22.7177 5.80456Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M16.3802 2.05249H7.29739C3.53382 2.05249 1.2002 4.71787 1.2002 8.48143V18.5825C1.2002 22.346 3.48807 25 7.29739 25H18.0504C21.814 25 24.1476 22.346 24.1476 18.5825V9.78552" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          <path opacity="0.4" d="M6.78271 16.626L10.5234 11.7644L14.7903 15.1161L18.451 10.3916" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
       </div>
     </div>
   </div>
@@ -326,5 +306,5 @@ export default {
 </script>
 
 <style>
-@import '@/css/TableStock.css'
+@import '@/css/TableClients.css'
 </style>

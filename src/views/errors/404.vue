@@ -1,7 +1,7 @@
 <template>
   <div class="not-found-container">
     <h1>404 - Página Não Encontrada</h1>
-    <p>Ops! A página que você está procurando não existe.</p>
+    <p>Ops! A página que você está procurando não existe ou você não possui autorização para entrar.</p>
     <button @click="goHome" class="home-button">Voltar para a Página Inicial</button>
   </div>
 </template>
